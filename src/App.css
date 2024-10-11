@@ -1,4 +1,5 @@
-/* src/App.css */
-.meu-estilo {
-  color: red; /* Exemplo de estilo específico */
-}
+.logo {
+    width: 250px; /* ou o tamanho desejado */
+    height: auto; /* mantém a proporção */
+  }
+  
