@@ -52,6 +52,7 @@ function App() {
     <div className="box-border">
       <div className="flex flex-col">
         <Navbar logo={logo} />
+        <div id="divider" className="rounded-full  lg:w-1/2 lg:mx-auto my-10" /> 
         
         {/* <Hero 
           appType={data.hero.appType}
@@ -63,7 +64,7 @@ function App() {
 
         {/* Container para o carrossel */}
           <Carousel/>
-          <div id="divider" className="rounded-full ring-2 ring-gray-200 lg:w-1/2 lg:mx-auto my-10" /> 
+          <div id="divider" className="rounded-full ring-2 ring-orange-300 lg:w-1/2 lg:mx-auto my-10" /> 
         <div className="w-full mt-10">
           <Step {...data.step1} />
           <Step {...data.step2} />
@@ -76,7 +77,7 @@ function App() {
           mainActionText={data.bottomLead.mainActionText}
           extraActionText={data.bottomLead.extraActionText}
         /> */}
-        <div id="divider" className="rounded-full ring-2 ring-gray-200 lg:w-1/2 lg:mx-auto my-10" />
+        <div id="divider" className="rounded-full ring-2 ring-orange-300  lg:w-1/2 lg:mx-auto my-10" />
 
         <Footer logo={logo} />
       </div>
