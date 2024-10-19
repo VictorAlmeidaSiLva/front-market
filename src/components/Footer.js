@@ -5,11 +5,6 @@ import React from "react";
 const Footer = ({ logo }) => {
   return (
     <div id="contact" className="flex flex-col items-center p-5">
-      <div className="flex w-full justify-center mb-4">
-        <a href="/" className="flex justify-center w-1/4"> 
-          <img className="w-3/4 md:w-1/2 lg:w-1/3" src={logo} alt="logo" />
-        </a>
-      </div>
       <div className="flex w-full justify-center items-start mb-4">
         <div className="map-container w-1/2">
           <iframe
@@ -21,6 +16,11 @@ const Footer = ({ logo }) => {
             loading="lazy"
           ></iframe>
         </div>
+      </div>
+      <div className="flex w-full justify-center mb-4">
+        <a href="/" className="flex justify-center w-1/4"> 
+          <img className="w-3/4 md:w-1/2 lg:w-1/3" src={logo} alt="logo" />
+        </a>
       </div>
       <div className="flex items-center justify-center space-x-4 mb-4">
         <a href="#">
