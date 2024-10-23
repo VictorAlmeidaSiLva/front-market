@@ -23,9 +23,9 @@ const Navbar = ({ logo }) => {
   useOutsideAlerter(wrapperRef, setOpenNav);
 
   return (
-    <div className="flex flex-row items-center justify-between h-28">
+    <div className="flex flex-row items-center justify-between h-28" style={{ backgroundColor: 'black' }}>
       <a href="/" className="pl-7 logo lg:ml-10">
-        <img height="65%" width="65%" src={logo} alt="logo" />
+        <img height="50%" width="50%" src={logo} alt="logo" />
       </a>
 
       {/* Mobile Nav */}

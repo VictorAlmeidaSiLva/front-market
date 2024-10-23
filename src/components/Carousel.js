@@ -1,17 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
-import kitchen from '../assets/kitchen.png';
+import historia from '../assets/historia.jpeg';
+import frente from '../assets/frente.jpeg';
 import meat from '../assets/meat.jpg';
 import salad from '../assets/salad.png';
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const items = [
     {
-      title: 'Our Premium Cuts',
-      img: kitchen,
-      description: 'Discover the finest cuts of meat, sourced directly from our farms.'
+      title: 'ONZE ONZE PREMIUM',
+      img: frente,
+      description: 'Variedade de carnes nobres, cortes especiais, temperos e acompanhamentos'
+    },
+    {
+      title: 'Nossa História',
+      img: historia,
+      description: 'Desde 1985 ONZE & ONZE PREMIUM é a mais tradicional casa de carnes de Bauru, sendo reconhecida pela excelência de seu produtos, e principalmente pela qualidade, sabor e frescor de suas carnes.'
     },
     {
       title: 'Quality You Can Trust',
@@ -27,77 +35,111 @@ const Carousel = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, 3000); // Muda a cada 3 segundos
+      nextSlide();
+    }, 10000); // Muda a cada 3 segundos
 
     return () => clearInterval(interval);
-  }, [items.length]);
+  }, [currentIndex]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+      setIsAnimating(false);
+    }, 500);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1));
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1));
+      setIsAnimating(false);
+    }, 500);
   };
 
   return (
-    <div id="indicators-carousel" className="relative w-full md:w-4/5 lg:w-3/4 mx-auto" data-carousel="static">
-      <div className="relative h-80 md:h-112 overflow-hidden rounded-lg">
+    <div style={{ position: 'relative', width: '100%', margin: '0 auto' }}>
+      <div style={{ position: 'relative', height: '600px', overflow: 'hidden', borderRadius: '10px' }}>
         {items.map((item, index) => (
           <div
             key={index}
-            className={`absolute w-full h-full transition-transform duration-700 ease-in-out ${index === currentIndex ? 'block' : 'hidden'}`}
-            data-carousel-item={index === currentIndex ? 'active' : ''}
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              transition: 'transform 0.7s ease-in-out',
+              display: index === currentIndex ? 'block' : 'none',
+            }}
           >
-            <img src={item.img} className="w-full h-full object-cover" alt={item.title} />
-            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4">
-              <h2 className="text-xl text-white">{item.title}</h2>
-              <p className="text-sm text-gray-200">{item.description}</p>
+            <img src={item.img} style={{ width: '100%', height: '100%', objectFit: 'fill', objectPosition: 'center',}} alt={item.title} />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0, 0, 0, 0.5)', padding: '16px' }}>
+              <h2 style={{ color: 'white', fontSize: '40px', animation: isAnimating ? 'fadeOut 0.5s' : 'fadeIn 0.5s' }}>{item.title}</h2>
+              <p style={{ color: '#ccc', fontSize: '25px', animation: isAnimating ? 'fadeOut 0.5s' : 'fadeIn 0.5s' }}>{item.description}</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Slider indicators */}
-      <div className="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
+      {/* Mover os botões para baixo */}
+      <div style={{ position: 'absolute', bottom: '0px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px' }}>
         {items.map((_, index) => (
           <button
             key={index}
             type="button"
-            className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-white' : 'bg-gray-400'}`}
-            aria-current={index === currentIndex}
-            aria-label={`Slide ${index + 1}`}
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: index === currentIndex ? 'white' : 'gray',
+            }}
             onClick={() => setCurrentIndex(index)}
           ></button>
         ))}
       </div>
 
-      {/* Slider controls */}
       <button
         type="button"
-        className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)' }}
         onClick={prevSlide}
       >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black bg-opacity-50 group-hover:bg-opacity-70 transition">
-          <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
-          </svg>
-          <span className="sr-only">Previous</span>
+        <span style={{ background: 'rgba(0, 0, 0, 0.5)', padding: '10px', borderRadius: '50%' }}>
+          &#9664;
         </span>
       </button>
       <button
         type="button"
-        className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}
         onClick={nextSlide}
       >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black bg-opacity-50 group-hover:bg-opacity-70 transition">
-          <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-          </svg>
-          <span className="sr-only">Next</span>
+        <span style={{ background: 'rgba(0, 0, 0, 0.5)', padding: '10px', borderRadius: '50%' }}>
+          &#9654;
         </span>
       </button>
+
+      <style>
+        {`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes fadeOut {
+            from {
+              opacity: 1;
+              transform: translateY(0);
+            }
+            to {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };

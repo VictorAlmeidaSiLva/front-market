@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer = ({ logo }) => {
   return (
-    <div id="contact" className="flex flex-col items-center p-5">
+    <div id="contact" style={{ backgroundColor: 'black', color: 'white', padding: '20px' }} className="flex flex-col items-center p-5">
       <div className="flex w-full justify-center items-start mb-4">
         <div className="map-container w-1/2">
           <iframe
