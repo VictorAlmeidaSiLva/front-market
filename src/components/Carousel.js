@@ -58,7 +58,7 @@ const Carousel = () => {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', margin: '0 auto' }}>
+    <div style={{ position: 'relative', width: '80%', margin: '0 auto' }}>
       <div style={{ position: 'relative', height: '600px', overflow: 'hidden', borderRadius: '10px' }}>
         {items.map((item, index) => (
           <div
@@ -72,7 +72,7 @@ const Carousel = () => {
             }}
           >
             <img src={item.img} style={{ width: '100%', height: '100%', objectFit: 'fill', objectPosition: 'center',}} alt={item.title} />
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0, 0, 0, 0.5)', padding: '16px' }}>
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0, 0, 0, 0.8)', padding: '16px' }}>
               <h2 style={{ color: 'white', fontSize: '40px', animation: isAnimating ? 'fadeOut 0.5s' : 'fadeIn 0.5s' }}>{item.title}</h2>
               <p style={{ color: '#ccc', fontSize: '25px', animation: isAnimating ? 'fadeOut 0.5s' : 'fadeIn 0.5s' }}>{item.description}</p>
             </div>
